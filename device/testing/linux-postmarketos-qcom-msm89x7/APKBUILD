@@ -2,7 +2,7 @@ maintainer="Barnabas Czeman <barnabas.czeman@postmarketos.org>"
 _flavor="postmarketos-qcom-msm89x7"
 pkgname=linux-postmarketos-qcom-msm89x7
 pkgver=6.17.8
-pkgrel=0
+pkgrel=1
 pkgdesc="Mainline kernel fork for Qualcomm QM215/MSM8917/MSM8937/MSM8940/SDM429/SDM439 devices"
 arch="aarch64"
 _carch="arm64"
@@ -24,13 +24,15 @@ makedepends="
 	postmarketos-installkernel
 	python3
 	"
-_tag="$pkgver-r0"
+_commit="ea0b0e0ce332c895fc37a747b9c34083db3965b4"
 _config="config-$_flavor.$arch"
 source="
-	$pkgname-v$_tag.tar.gz::$url/archive/v$_tag.tar.gz
+	$pkgname-$_commit.tar.gz::https://github.com/msm89x7-mainline/linux/archive/$_commit/linux-$_commit.tar.gz
+  9000-disable-11n.patch
+  9001-qm215-dts-fixups.patch
 	$_config
 "
-builddir="$srcdir/linux-$_tag"
+builddir="$srcdir/linux-$_commit"
 
 prepare() {
 	default_prepare
@@ -57,6 +59,8 @@ package() {
 		"$pkgdir"/usr/share/kernel/$_flavor/kernel.release
 }
 sha512sums="
-dda3550657673cd6f606c0cabed8c55d449a9e2110e1ab579bdef37ec04d346e0c953fd98c66970fe36c2a0599d260cae25ecefe644da6c95d4d1b5cc7b25d87  linux-postmarketos-qcom-msm89x7-v6.17.8-r0.tar.gz
+9d1543870ca1b38228cb47cb81b5f41e00863a72a7bdc55b676e69e565b7779b7bc8cd571c010fb6ebe1e987e2891cd79c1c26e0d9dc4e9aa4658f75f515588f  linux-postmarketos-qcom-msm89x7-ea0b0e0ce332c895fc37a747b9c34083db3965b4.tar.gz
+f21abecd7adcf7adf4cf20f0e260d23b79c8e19676c7ed846c50b4e1c574d813ef7e6fc8ddd3ba393c914338ea5062f2a15936a9ab485ae6cbea8db0beaff0bb  9000-disable-11n.patch
+49a598b02517a64bec436aa3732c783417c44dc0d6a7f7e5d397f86810ec397af8e981807faa4a47dc43f0b84af395b3ce7036f2a0dbd1fd76145fb67140ed67  9001-qm215-dts-fixups.patch
 5fa02507dc15cf34253563946a7cfc47711573b8c2135bef88fd4895795b4c42e4eb6cbe0665a9523a6bab4977b7d9f97fc1432505307e7fd77b3cc6a6eeab1f  config-postmarketos-qcom-msm89x7.aarch64
 "

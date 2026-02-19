@@ -1,0 +1,15 @@
+diff --git a/arch/arm64/boot/dts/qcom/qm215-nokia-weeknd.dts b/arch/arm64/boot/dts/qcom/qm215-nokia-weeknd.dts
+index 7207d1f36318..e5afb109994d 100644
+--- a/arch/arm64/boot/dts/qcom/qm215-nokia-weeknd.dts
++++ b/arch/arm64/boot/dts/qcom/qm215-nokia-weeknd.dts
+@@ -350,6 +350,10 @@ gc5035_ep: endpoint {
+        };
+ };
+ 
++&lpass_codec {
++       status = "okay";
++};
++
+ &mdss_dsi0 {
+        status = "disabled";
+ };
